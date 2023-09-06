@@ -1,4 +1,5 @@
 templates/deploy_rosa/tf/terraform.auto.tfvars
 templates/deploy_rosa/tf/*.terraform*
-templates/deploy_rosa/tf/*.tfstate
+templates/deploy_rosa/tf/*.tfstate*
+templates/deploy_rosa/tf/*.tfstate.backup
 templates/deploy_rosa/tf/rosa.plan
