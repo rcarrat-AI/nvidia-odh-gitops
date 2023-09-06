@@ -1,27 +1,27 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: gpu-operators-appset
+  name: gpu-instances-appset
   namespace: openshift-gitops
 spec:
   generators:
     - git:
-        repoURL: https://github.com/RedHat-EMEA-SSA-Team/ns-apps
-        revision: appsets
+        repoURL: https://github.com/rcarrat-AI/nvidia-odh-gitops
+        revision: main
         directories:
-          - path: apps/*
+          - path: templates/apps/*
   template:
     metadata:
       name: "{{path.basename}}"
     spec:
-      project: appset-apps-project
+      project: apps-project
       syncPolicy:
         automated:
           prune: true
           selfHeal: true
       source:
-        repoURL: https://github.com/RedHat-EMEA-SSA-Team/ns-apps
-        targetRevision: appsets
+        repoURL: https://github.com/rcarrat-AI/nvidia-odh-gitops
+        targetRevision: main
         path: "{{path}}"
       destination:
         server: https://kubernetes.default.svc

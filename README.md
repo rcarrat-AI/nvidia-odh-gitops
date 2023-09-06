@@ -19,3 +19,9 @@ oc apply -k https://github.com/redhat-cop/gitops-catalog/openshift-gitops-operat
 ```sh
 
 ```
+
+## Check the OpenShift GitOps status
+
+```sh
+echo "https://$(oc get route -n openshift-gitops openshift-gitops-server -o jsonpath='{.spec.host}')"
+```
