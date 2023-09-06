@@ -1,7 +1,8 @@
-apiVersion: kfdef.apps.kubeflow.org/v1
 kind: KfDef
+apiVersion: kfdef.apps.kubeflow.org/v1
 metadata:
   name: opendatahub
+  namespace: odh
 spec:
   applications:
     - kustomizeConfig:
@@ -10,8 +11,6 @@ spec:
           path: odh-common
       name: odh-common
     - kustomizeConfig:
-        overlays:
-          - authentication
         repoRef:
           name: manifests
           path: odh-dashboard
@@ -19,8 +18,33 @@ spec:
     - kustomizeConfig:
         repoRef:
           name: manifests
+          path: prometheus/cluster
+      name: prometheus-cluster
+    - kustomizeConfig:
+        repoRef:
+          name: manifests
+          path: prometheus/operator
+      name: prometheus-operator
+    - kustomizeConfig:
+        repoRef:
+          name: manifests
+          path: grafana/cluster
+      name: grafana-cluster
+    - kustomizeConfig:
+        repoRef:
+          name: manifests
+          path: grafana/grafana
+      name: grafana-instance
+    - kustomizeConfig:
+        repoRef:
+          name: manifests
           path: odh-notebook-controller
       name: odh-notebook-controller
+    - kustomizeConfig:
+        repoRef:
+          name: manifests
+          path: notebook-images
+      name: notebook-images
     - kustomizeConfig:
         overlays:
           - odh-model-controller
@@ -29,23 +53,15 @@ spec:
           path: model-mesh
       name: model-mesh
     - kustomizeConfig:
-        overlays:
-          - metadata-store-mariadb
-          - ds-pipeline-ui
-          - object-store-minio
-          - integration-odhdashboard
-          - default-configs
         repoRef:
           name: manifests
-          path: data-science-pipelines
-      name: ds-pipelines
+          path: data-science-pipelines-operator
+      name: data-science-pipelines-operator
     - kustomizeConfig:
-        overlays:
-          - additional
         repoRef:
           name: manifests
-          path: jupyterhub/notebook-images
-      name: notebook-images
+          path: trustyai-service
+      name: trustyai
   repos:
     - name: manifests
-      uri: "https://github.com/opendatahub-io/odh-manifests/tarball/v1.4.1"
+      uri: "https://github.com/opendatahub-io/odh-manifests/tarball/v1.5"
