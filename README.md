@@ -2,22 +2,18 @@
 
 Repository for provision OpenDataHub, Nvidia GPU Operator and Node Feature Discovery using GitOps
 
+![Nvidia GPU GitOps](./docs/nvidia-gpu-gitops.png)
+
 # Install OpenShift GitOps
 
 ```sh
 oc apply -k https://github.com/redhat-cop/gitops-catalog/openshift-gitops-operator/operator/overlays/latest
 ```
 
-## Install Operators
+## Install all using OpenShift GitOps
 
 ```sh
-
-```
-
-## Deploy Operator instances
-
-```sh
-
+oc apply -k deploy/
 ```
 
 ## Check the OpenShift GitOps status
