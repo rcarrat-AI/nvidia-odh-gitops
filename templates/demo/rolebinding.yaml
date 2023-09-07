@@ -3,13 +3,13 @@ kind: RoleBinding
 metadata:
   labels:
     opendatahub.io/dashboard: "true"
-  name: jupyter-nb-{{ .Values.user_urlencoded }}-notebook-view
+  name: jupyter-nb-place-2dholder-notebook-view
   namespace: rhods-notebooks
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: jupyter-nb-{{ .Values.user_urlencoded }}-notebook-view
+  name: jupyter-nb-place-2dholder-notebook-view
 subjects:
-  - apiGroup: rbac.authorization.k8s.io
-    kind: User
-    name: { { .Values.user } }
+- apiGroup: rbac.authorization.k8s.io
+  kind: User
+  name: place-holder

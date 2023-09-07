@@ -3,14 +3,14 @@ kind: Role
 metadata:
   labels:
     opendatahub.io/dashboard: "true"
-  name: jupyter-nb-{{ .Values.user_urlencoded }}-notebook-view
+  name: jupyter-nb-place-2dholder-notebook-view
   namespace: rhods-notebooks
 rules:
-  - apiGroups:
-      - kubeflow.org
-    resourceNames:
-      - jupyter-nb-{{ .Values.user_urlencoded }}
-    resources:
-      - notebooks
-    verbs:
-      - get
+- apiGroups:
+  - kubeflow.org
+  resourceNames:
+  - jupyter-nb-place-2dholder
+  resources:
+  - notebooks
+  verbs:
+  - get

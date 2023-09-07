@@ -3,13 +3,13 @@ kind: PersistentVolumeClaim
 metadata:
   labels:
     opendatahub.io/dashboard: "true"
-  name: jupyterhub-nb-{{ .Values.user_urlencoded }}-pvc
+  name: jupyterhub-nb-place-2dholder-pvc
   namespace: rhods-notebooks
 spec:
   accessModes:
-    - ReadWriteOnce
+  - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
-  storageClassName: { { .Values.notebook.storage.class } }
+  storageClassName: managed-csi
   volumeMode: Filesystem

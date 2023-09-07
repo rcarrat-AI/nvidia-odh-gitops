@@ -119,6 +119,18 @@ variable "machineset_replicas" {
   default     = null
 }
 
+variable "multi_availability_zone_machinepool" {
+  description = "Multi Availaibility Zone for the machine pool. If the ROSA cluster is with HA, this variable needs to be true"
+  type        = bool
+  default     = false
+}
+
+variable "spot_instances_machinepool" {
+  description = "Usage of Spot Instances for the machine poll"
+  type        = bool
+  default     = true
+}
+
 variable "autoscaling_enabled" {
   description = "Enables autoscaling. This variable requires you to set a maximum and minimum replicas range using the `max_replicas` and `min_replicas` variables."
   type        = string
@@ -142,3 +154,4 @@ variable "labels" {
   type        = map(string)
   default     = null
 }
+

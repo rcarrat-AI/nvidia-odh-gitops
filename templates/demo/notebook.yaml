@@ -1,17 +1,11 @@
 apiVersion: kubeflow.org/v1
 kind: Notebook
 metadata:
-  annotations:
-    notebooks.opendatahub.io/inject-oauth: "true"
-    notebooks.opendatahub.io/oauth-logout-url: https://rhods-dashboard-redhat-ods-applications.{{ .Values.base_domain }}/notebookController/{{ .Values.user_urlencoded }}/home
-    opendatahub.io/link: https://jupyter-nb-{{ .Values.user_urlencoded }}-rhods-notebooks.{{ .Values.base_domain }}/notebook/rhods-notebooks/jupyter-nb-{{ .Values.user_urlencoded }}
-    opendatahub.io/username: {{ .Values.user }}
   labels:
-    app: jupyter-nb-{{ .Values.user_urlencoded }}
+    app: jupyter-nb-place-2dholder
     opendatahub.io/dashboard: "true"
     opendatahub.io/odh-managed: "true"
-    opendatahub.io/user: {{ .Values.user_urlencoded }}
-  name: jupyter-nb-{{ .Values.user_urlencoded }}
+  name: jupyter-nb-place-2dholder
   namespace: rhods-notebooks
 spec:
   template:
@@ -19,68 +13,68 @@ spec:
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-          - preference:
-              matchExpressions:
-              - key: nvidia.com/gpu.present
-                operator: NotIn
-                values:
-                - "true"
-            weight: 1
+            - preference:
+                matchExpressions:
+                  - key: nvidia.com/gpu.present
+                    operator: NotIn
+                    values:
+                      - "true"
+              weight: 1
       containers:
-      - env:
-        - name: NOTEBOOK_ARGS
-          value: |-
-            --ServerApp.port=8888
-                              --ServerApp.token=''
-                              --ServerApp.password=''
-                              --ServerApp.base_url=/notebook/rhods-notebooks/jupyter-nb-{{ .Values.user_urlencoded }}
-                              --ServerApp.quit_button=False
-                              --ServerApp.tornado_settings={"user":"{{ .Values.user_urlencoded }}","hub_host":"https://rhods-dashboard-redhat-ods-applications.{{ .Values.base_domain }}","hub_prefix":"/notebookController/{{ .Values.user_urlencoded }}"}
-        - name: JUPYTER_IMAGE
-          value: {{ .Values.notebook.image }}
-        - name: JUPYTER_NOTEBOOK_PORT
-          value: "8888"
-        image: {{ .Values.notebook.image }}
-        imagePullPolicy: Always
-        livenessProbe:
-          failureThreshold: 3
-          httpGet:
-            path: /notebook/rhods-notebooks/jupyter-nb-{{ .Values.user_urlencoded }}/api
-            port: notebook-port
-            scheme: HTTP
-          initialDelaySeconds: 10
-          periodSeconds: 5
-          successThreshold: 1
-          timeoutSeconds: 1
-        name: jupyter-nb-{{ .Values.user_urlencoded }}
-        ports:
-        - containerPort: 8888
-          name: notebook-port
-          protocol: TCP
-        readinessProbe:
-          failureThreshold: 3
-          httpGet:
-            path: /notebook/rhods-notebooks/jupyter-nb-{{ .Values.user_urlencoded }}/api
-            port: notebook-port
-            scheme: HTTP
-          initialDelaySeconds: 10
-          periodSeconds: 5
-          successThreshold: 1
-          timeoutSeconds: 1
-        resources:
-          limits:
-            cpu: "{{ .Values.notebook.resources.limits.cpu }}"
-            memory: {{ .Values.notebook.resources.limits.memory }}
-          requests:
-            cpu: "{{ .Values.notebook.resources.requests.cpu }}"
-            memory: {{ .Values.notebook.resources.requests.memory }}
-        volumeMounts:
-        - mountPath: /opt/app-root/src
-          name: jupyterhub-nb-{{ .Values.user_urlencoded }}-pvc
-        workingDir: /opt/app-root/src
+        - env:
+            - name: NOTEBOOK_ARGS
+              value: |-
+                --ServerApp.port=8888
+                                  --ServerApp.token=''
+                                  --ServerApp.password=''
+                                  --ServerApp.base_url=/notebook/rhods-notebooks/jupyter-nb-place-2dholder
+                                  --ServerApp.quit_button=False
+                                  --ServerApp.tornado_settings={"user":"place-2dholder","hub_host":"https://rhods-dashboard-redhat-ods-applications.apps.example.org","hub_prefix":"/notebookController/place-2dholder"}
+            - name: JUPYTER_IMAGE
+              value: image-registry.openshift-image-registry.svc:5000/redhat-ods-applications/s2i-minimal-notebook:2023.1
+            - name: JUPYTER_NOTEBOOK_PORT
+              value: "8888"
+          image: image-registry.openshift-image-registry.svc:5000/redhat-ods-applications/s2i-minimal-notebook:2023.1
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /notebook/rhods-notebooks/jupyter-nb-place-2dholder/api
+              port: notebook-port
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: jupyter-nb-place-2dholder
+          ports:
+            - containerPort: 8888
+              name: notebook-port
+              protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /notebook/rhods-notebooks/jupyter-nb-place-2dholder/api
+              port: notebook-port
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+              cpu: "1"
+              memory: 2Gi
+            requests:
+              cpu: "500m"
+              memory: 1Gi
+          volumeMounts:
+            - mountPath: /opt/app-root/src
+              name: jupyterhub-nb-place-2dholder-pvc
+          workingDir: /opt/app-root/src
       enableServiceLinks: false
-      serviceAccountName: jupyter-nb-{{ .Values.user_urlencoded }}
+      serviceAccountName: jupyter-nb-place-2dholder
       volumes:
-      - name: jupyterhub-nb-{{ .Values.user_urlencoded }}-pvc
-        persistentVolumeClaim:
-          claimName: jupyterhub-nb-{{ .Values.user_urlencoded }}-pvc
+        - name: jupyterhub-nb-place-2dholder-pvc
+          persistentVolumeClaim:
+            claimName: jupyterhub-nb-place-2dholder-pvc
