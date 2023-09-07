@@ -4,7 +4,11 @@ Repository for provision OpenDataHub, Nvidia GPU Operator and Node Feature Disco
 
 ![Nvidia GPU GitOps](./docs/nvidia-gpu-gitops.png)
 
-# Install OpenShift GitOps
+## Install ARO or ROSA cluster
+
+* [Install ROSA Using Terraform](./templates/deploy_rosa/README.md)
+
+## Install OpenShift GitOps
 
 ```sh
 oc apply -k https://github.com/redhat-cop/gitops-catalog/openshift-gitops-operator/operator/overlays/latest

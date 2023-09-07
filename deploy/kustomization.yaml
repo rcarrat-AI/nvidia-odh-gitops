@@ -6,3 +6,4 @@ namespace: openshift-gitops
 bases:
   - ../argo-apps
   - ../argo-projects
+  - rbac.yaml
