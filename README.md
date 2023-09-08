@@ -1,4 +1,4 @@
-# Deploy OpenDataHub, Nvidia GPU Operator and Node Feature Discovery using GitOps!
+# Deploy RH OpenShift AI, Nvidia GPU Operator and Node Feature Discovery using GitOps!
 
 Repository for provision OpenDataHub, Nvidia GPU Operator and Node Feature Discovery using GitOps
 
