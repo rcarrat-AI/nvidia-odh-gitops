@@ -5,4 +5,6 @@ resource "rhcs_machine_pool" "machine_pool" {
   replicas                = var.machineset_replicas
   multi_availability_zone = var.multi_availability_zone_machinepool
   use_spot_instances      = var.spot_instances_machinepool
+
+  depends_on = [rhcs_cluster_rosa_classic.rosa]
 }

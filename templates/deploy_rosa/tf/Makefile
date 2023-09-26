@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 
-CLUSTER_NAME ?= tf-$(shell whoami)
+CLUSTER_NAME ?= rosa-$(shell whoami)
 
 .PHONY: init
 init:
