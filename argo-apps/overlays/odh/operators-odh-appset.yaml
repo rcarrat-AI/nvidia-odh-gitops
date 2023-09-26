@@ -11,7 +11,7 @@ spec:
         repoURL: https://github.com/rcarrat-AI/nvidia-odh-gitops
         revision: main
         directories:
-          - path: templates/odh/operators/*
+          - path: templates/odh/*
   template:
     metadata:
       name: "{{path.basename}}"
