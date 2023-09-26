@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: gpu-instances-appset
+  name: operators-rhods-appset
   namespace: openshift-gitops
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource
@@ -11,12 +11,12 @@ spec:
         repoURL: https://github.com/rcarrat-AI/nvidia-odh-gitops
         revision: main
         directories:
-          - path: templates/apps/*
+          - path: templates/rhods/operators/*
   template:
     metadata:
       name: "{{path.basename}}"
     spec:
-      project: apps-project
+      project: operators-project
       syncPolicy:
         automated:
           prune: true

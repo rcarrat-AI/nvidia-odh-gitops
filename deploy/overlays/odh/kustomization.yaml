@@ -4,6 +4,5 @@ kind: Kustomization
 namespace: openshift-gitops
 
 bases:
-  - ../argo-apps
-  - ../argo-projects
-  - rbac.yaml
+  - ../../base
+  - ../../../argo-apps/overlays/odh
